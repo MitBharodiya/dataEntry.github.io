@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Company</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            background: white;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .salesman {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            background-color: #f9f9f9;
+        }
+
+        .salesman label {
+            margin-top: 10px;
+        }
+        button a{
+            text-decoration: none;
+            color: white;
+        }
+
+        #salesmanContainer {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Create Company</h1>
+    <form action="/companies" method="POST">
+        <label for="item">Item:</label>
+        <input type="text" id="item" name="item" required>
+
+        <label for="company">Company:</label>
+        <input type="text" id="company" name="company" required>
+
+        <label for="dealer">Dealer:</label>
+        <input type="text" id="dealer" name="dealer" required>
+
+        <h2>Salesman</h2>
+        <div id="salesmanContainer">
+            <div class="salesman">
+                <label for="salesManName">Salesman Name:</label>
+                <input type="text" name="salesMan[0][name]" required>
+                <label for="salesManContact">Contact Number:</label>
+                <input type="text" name="salesMan[0][contactNumber]" required>
+            </div>
+        </div>
+        <button type="submit">Create Company</button>
+        <button type="button" onclick="addSalesman()">Add Another Salesman</button>
+        <button type:"button"><a href="/companies" class="button">Download as Excel</a></button><h1></h1>
+        <button type:"button"><a href="/companies/list" class="button">Show all Companies </a></button>
+    </form>
+
+    <script>
+        function addSalesman() {
+            const container = document.getElementById('salesmanContainer');
+            const index = container.children.length;
+            const newSalesman = `
+                <div class="salesman">
+                    <label for="salesManName">Salesman Name:</label>
+                    <input type="text" name="salesMan[${index}][name]" required>
+                    <label for="salesManContact">Contact Number:</label>
+                    <input type="text" name="salesMan[${index}][contactNumber]" required>
+                </div>`;
+            container.insertAdjacentHTML('beforeend', newSalesman);
+        }
+    </script>
+</body>
+</html>
+
+
